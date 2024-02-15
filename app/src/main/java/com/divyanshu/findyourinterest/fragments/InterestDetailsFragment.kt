@@ -7,11 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.divyanshu.findyourinterest.R
 import com.divyanshu.findyourinterest.databinding.FragmentInterestDetailsBinding
-import com.divyanshu.findyourinterest.databinding.FragmentInterestsBinding
 
-class InterestsFragment : Fragment(R.layout.fragment_interests) {
+class InterestDetailsFragment : Fragment(R.layout.fragment_interest_details) {
 
-    private var _binding: FragmentInterestsBinding? = null
+    private var _binding: FragmentInterestDetailsBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,11 +21,11 @@ class InterestsFragment : Fragment(R.layout.fragment_interests) {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View {
         _binding =
-            FragmentInterestsBinding.inflate(inflater, container, false)
+            FragmentInterestDetailsBinding.inflate(inflater, container, false)
         return binding.root
     }
-
 }
