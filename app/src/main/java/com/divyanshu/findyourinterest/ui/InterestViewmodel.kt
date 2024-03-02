@@ -16,13 +16,13 @@ class InterestViewModel @Inject constructor(private val repository: InterestRepo
     ViewModel() {
 
     private val _interestResponse = MutableLiveData<Result<Interest>>()
-    private val interest: LiveData<Result<Interest>> get() = _interestResponse
+    val interest: LiveData<Result<Interest>> get() = _interestResponse
 
     init {
         getAnInterest()
     }
 
-    private fun getAnInterest() {
+    fun getAnInterest() {
         _interestResponse.postValue(Result.Loading)
         viewModelScope.launch {
             repository.getRandomInterest().let {
