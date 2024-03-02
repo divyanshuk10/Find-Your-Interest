@@ -1,7 +1,6 @@
 package com.divyanshu.findyourinterest.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,9 +18,6 @@ class InterestsFragment : Fragment(R.layout.fragment_interests) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            // TODO : fetch args
-        }
     }
 
     override fun onCreateView(
@@ -37,7 +33,33 @@ class InterestsFragment : Fragment(R.layout.fragment_interests) {
         super.onViewCreated(view, savedInstanceState)
         interestViewModel.getAnInterest()
         interestViewModel.interest.observe(requireActivity()) {
-            Log.d("TAG", it.toData().toString())
+            it?.toData()?.let { interest ->
+                binding.txtActivity.text =
+                    buildString {
+                        append(context?.resources?.getString(R.string.activity))
+                        append(interest.activity)
+                    }
+                binding.txtParticipants.text =
+                    buildString {
+                        append(context?.resources?.getString(R.string.participants))
+                        append(interest.participants)
+                    }
+                binding.txtType.text =
+                    buildString {
+                        append(context?.resources?.getString(R.string.type))
+                        append(interest.type)
+                    }
+                binding.txtLink.text =
+                    buildString {
+                        append(context?.resources?.getString(R.string.link))
+                        append(interest.link)
+                    }
+                binding.txtAccessibility.text =
+                    buildString {
+                        append(context?.resources?.getString(R.string.accessibility))
+                        append(interest.accessibility)
+                    }
+            }
         }
     }
 
