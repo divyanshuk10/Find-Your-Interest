@@ -6,6 +6,8 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -18,11 +20,23 @@ object AppModule {
     fun providesBaseUrl() = Constant.BASE_URL
 
     @Provides
-    fun providesRetrofitinstance(baseUrl: String) =
+    fun providesNetworkInterceptor(): HttpLoggingInterceptor {
+        val loggingInterceptor = HttpLoggingInterceptor()
+        return loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+    }
+
+    @Provides
+    fun providesOkhttpClient(loggingInterceptor: HttpLoggingInterceptor) =
+        OkHttpClient.Builder().addNetworkInterceptor(loggingInterceptor).build()
+
+    @Provides
+    fun providesRetrofitInstance(baseUrl: String, okHttpClient: OkHttpClient) =
         Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
+            .client(okHttpClient)
             .build()
             .create(InterestAPI::class.java)
+
 }
