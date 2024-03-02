@@ -30,7 +30,7 @@ object AppModule {
         OkHttpClient.Builder().addNetworkInterceptor(loggingInterceptor).build()
 
     @Provides
-    fun providesRetrofitInstance(baseUrl: String, okHttpClient: OkHttpClient) =
+    fun providesRetrofitInstance(baseUrl: String, okHttpClient: OkHttpClient): InterestAPI =
         Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())

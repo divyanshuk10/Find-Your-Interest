@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Observer
 import com.divyanshu.findyourinterest.R
 import com.divyanshu.findyourinterest.databinding.FragmentInterestsBinding
 import com.divyanshu.findyourinterest.ui.InterestViewModel
@@ -37,9 +36,9 @@ class InterestsFragment : Fragment(R.layout.fragment_interests) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         interestViewModel.getAnInterest()
-        interestViewModel.interest.observe(requireActivity(), {
+        interestViewModel.interest.observe(requireActivity()) {
             Log.d("TAG", it.toData().toString())
-        })
+        }
     }
 
 }
