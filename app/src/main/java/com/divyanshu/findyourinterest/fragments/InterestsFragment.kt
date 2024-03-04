@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import coil.load
 import com.divyanshu.findyourinterest.R
 import com.divyanshu.findyourinterest.databinding.FragmentInterestsBinding
 import com.divyanshu.findyourinterest.ui.InterestViewModel
+import com.divyanshu.findyourinterest.utils.Constant.Companion.hobbiesList
 
 class InterestsFragment : Fragment(R.layout.fragment_interests) {
 
@@ -16,9 +18,6 @@ class InterestsFragment : Fragment(R.layout.fragment_interests) {
     private val binding get() = _binding!!
     private val interestViewModel by activityViewModels<InterestViewModel>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -28,9 +27,9 @@ class InterestsFragment : Fragment(R.layout.fragment_interests) {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.imgHobby.load(hobbiesList[(0..9).random()])
         interestViewModel.getAnInterest()
         interestViewModel.interest.observe(requireActivity()) {
             it?.toData()?.let { interest ->
@@ -62,5 +61,4 @@ class InterestsFragment : Fragment(R.layout.fragment_interests) {
             }
         }
     }
-
 }
