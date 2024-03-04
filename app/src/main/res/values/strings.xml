@@ -52,4 +52,7 @@
     <string name="button">Button</string>
     <string name="activity">Activity : </string>
     <string name="add_to_favourite">Add to favourite</string>
+    <string name="bored">Bored?</string>
+    <string name="find_something_interesting_now">Find something Interesting, Now!</string>
+    <string name="find_interest">Find Interest</string>
 </resources>
