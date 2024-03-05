@@ -14,15 +14,44 @@
         android:id="@+id/favouriteFragment"
         android:name="com.divyanshu.findyourinterest.fragments.FavouriteFragment"
         android:label="Favourite"
-        tools:layout="@layout/fragment_favourite" />
+        tools:layout="@layout/fragment_favourite">
+        <action
+            android:id="@+id/action_favouriteFragment_to_interestDetailsFragment"
+            app:destination="@id/interestDetailsFragment">
+            <argument
+                android:name="interest"
+                app:argType="com.divyanshu.findyourinterest.model.Interest"
+                app:nullable="true" />
+        </action>
+    </fragment>
     <fragment
         android:id="@+id/interestsFragment"
         android:name="com.divyanshu.findyourinterest.fragments.InterestsFragment"
         android:label="Interests"
-        tools:layout="@layout/fragment_interests" />
+        tools:layout="@layout/fragment_interests">
+        <action
+            android:id="@+id/action_interestsFragment_to_interestDetailsFragment"
+            app:destination="@id/interestDetailsFragment">
+            <argument
+                android:name="interest"
+                app:argType="com.divyanshu.findyourinterest.model.Interest"
+                app:nullable="true" />
+        </action>
+    </fragment>
     <fragment
         android:id="@+id/interestDetailsFragment"
         android:name="com.divyanshu.findyourinterest.fragments.InterestDetailsFragment"
         android:label="Details"
-        tools:layout="@layout/fragment_interest_details" />
+        tools:layout="@layout/fragment_interest_details">
+        <action
+            android:id="@+id/action_interestDetailsFragment_to_favouriteFragment"
+            app:destination="@id/favouriteFragment" />
+        <action
+            android:id="@+id/action_interestDetailsFragment_to_interestsFragment"
+            app:destination="@id/interestsFragment" />
+        <argument
+            android:name="interest"
+            app:argType="com.divyanshu.findyourinterest.model.Interest"
+            app:nullable="true" />
+    </fragment>
 </navigation>

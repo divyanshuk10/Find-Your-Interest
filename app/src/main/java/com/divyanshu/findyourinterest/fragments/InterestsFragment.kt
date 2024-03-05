@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import coil.load
 import com.divyanshu.findyourinterest.R
 import com.divyanshu.findyourinterest.databinding.FragmentInterestsBinding
+import com.divyanshu.findyourinterest.model.Interest
 import com.divyanshu.findyourinterest.model.Result
 import com.divyanshu.findyourinterest.ui.InterestViewModel
 import com.divyanshu.findyourinterest.utils.Constant.Companion.hobbiesList
@@ -30,9 +32,7 @@ class InterestsFragment : Fragment(R.layout.fragment_interests) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.imgHobby.load(hobbiesList[(0..9).random()])
         findNewInterest()
-
         binding.swipeRefresh.setOnRefreshListener {
             findNewInterest()
         }
@@ -41,16 +41,21 @@ class InterestsFragment : Fragment(R.layout.fragment_interests) {
             when (it) {
                 is Result.Loading -> {
                     showProgress()
+                    binding.btnShowDetails.visibility = View.INVISIBLE
                 }
 
                 is Result.Error -> {
                     hideProgress()
+                    binding.btnShowDetails.visibility = View.INVISIBLE
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
                 }
 
                 is Result.Success -> {
                     hideProgress()
                     it.toData()?.let { interest ->
+                        navigateToInterestDetailsPage(
+                            interestData = interest
+                        )
                         binding.txtActivity.text =
                             buildString {
                                 append(context?.resources?.getString(R.string.activity))
@@ -76,10 +81,28 @@ class InterestsFragment : Fragment(R.layout.fragment_interests) {
                                 append(context?.resources?.getString(R.string.accessibility))
                                 append(interest.accessibility)
                             }
+                        refreshBackgroundImage()
                     }
                 }
             }
         }
+    }
+
+    private fun navigateToInterestDetailsPage(interestData: Interest) {
+        if (interestData.link.isNotEmpty()) {
+            binding.btnShowDetails.visibility = View.VISIBLE
+            binding.btnShowDetails.setOnClickListener {
+                val direction =
+                    InterestsFragmentDirections.actionInterestsFragmentToInterestDetailsFragment(
+                        interestData
+                    )
+                it.findNavController().navigate(direction)
+            }
+        }
+    }
+
+    private fun refreshBackgroundImage() {
+        binding.imgHobby.load(hobbiesList[(0..9).random()])
     }
 
     private fun findNewInterest() {
