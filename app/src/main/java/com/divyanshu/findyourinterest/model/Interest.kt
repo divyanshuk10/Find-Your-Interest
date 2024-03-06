@@ -1,9 +1,13 @@
 package com.divyanshu.findyourinterest.model
 
 import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
+@Entity(tableName = "interest_table")
 data class Interest(
     val accessibility: Double,
     val activity: String,
@@ -12,4 +16,8 @@ data class Interest(
     val participants: Int,
     val price: Double,
     val type: String
-) : Parcelable
+) : Parcelable{
+    @IgnoredOnParcel
+    @PrimaryKey(autoGenerate = true)
+    val id:Int = 0
+}
