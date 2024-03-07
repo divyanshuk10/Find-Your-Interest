@@ -13,20 +13,22 @@ import com.divyanshu.findyourinterest.R
 import com.divyanshu.findyourinterest.databinding.FragmentInterestsBinding
 import com.divyanshu.findyourinterest.model.Interest
 import com.divyanshu.findyourinterest.model.Result
-import com.divyanshu.findyourinterest.ui.InterestViewModel
 import com.divyanshu.findyourinterest.utils.Constant.Companion.hobbiesList
+import com.divyanshu.findyourinterest.viewmodel.FavouriteInterestViewModel
+import com.divyanshu.findyourinterest.viewmodel.InterestViewModel
 
 class InterestsFragment : Fragment(R.layout.fragment_interests) {
 
     private var _binding: FragmentInterestsBinding? = null
     private val binding get() = _binding!!
     private val interestViewModel by activityViewModels<InterestViewModel>()
+    private val favouritesViewModel by activityViewModels<FavouriteInterestViewModel>()
+    private var isAddedToFavourites = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        _binding =
-            FragmentInterestsBinding.inflate(inflater, container, false)
+        _binding = FragmentInterestsBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -48,6 +50,7 @@ class InterestsFragment : Fragment(R.layout.fragment_interests) {
                     hideProgress()
                     binding.btnShowDetails.visibility = View.INVISIBLE
                     Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show()
+                    updateAddToFavouriteButton(null)
                 }
 
                 is Result.Success -> {
@@ -56,36 +59,48 @@ class InterestsFragment : Fragment(R.layout.fragment_interests) {
                         navigateToInterestDetailsPage(
                             interestData = interest
                         )
-                        binding.txtActivity.text =
-                            buildString {
-                                append(context?.resources?.getString(R.string.activity))
-                                append(interest.activity)
-                            }
-                        binding.txtParticipants.text =
-                            buildString {
-                                append(context?.resources?.getString(R.string.participants))
-                                append(interest.participants)
-                            }
-                        binding.txtType.text =
-                            buildString {
-                                append(context?.resources?.getString(R.string.type))
-                                append(interest.type)
-                            }
-                        binding.txtLink.text =
-                            buildString {
-                                append(context?.resources?.getString(R.string.link))
-                                append(interest.link)
-                            }
-                        binding.txtAccessibility.text =
-                            buildString {
-                                append(context?.resources?.getString(R.string.accessibility))
-                                append(interest.accessibility)
-                            }
+                        binding.txtActivity.text = buildString {
+                            append(context?.resources?.getString(R.string.activity))
+                            append(interest.activity)
+                        }
+                        binding.txtParticipants.text = buildString {
+                            append(context?.resources?.getString(R.string.participants))
+                            append(interest.participants)
+                        }
+                        binding.txtType.text = buildString {
+                            append(context?.resources?.getString(R.string.type))
+                            append(interest.type)
+                        }
+                        binding.txtLink.text = buildString {
+                            append(context?.resources?.getString(R.string.link))
+                            append(interest.link)
+                        }
+                        binding.txtAccessibility.text = buildString {
+                            append(context?.resources?.getString(R.string.accessibility))
+                            append(interest.accessibility)
+                        }
                         refreshBackgroundImage()
+                        updateAddToFavouriteButton(interest)
                     }
                 }
             }
         }
+    }
+
+    private fun updateAddToFavouriteButton(interest: Interest?) {
+        isAddedToFavourites = false
+        binding.btnFavourite.setOnClickListener {
+            if (interest != null && !isAddedToFavourites) {
+                isAddedToFavourites = true
+                addToFavourites(interest)
+            } else if (isAddedToFavourites) {
+                Toast.makeText(activity, "Already added to favourites", Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+    private fun addToFavourites(interestData: Interest) {
+        favouritesViewModel.addToFavorites(interestData)
     }
 
     private fun navigateToInterestDetailsPage(interestData: Interest) {

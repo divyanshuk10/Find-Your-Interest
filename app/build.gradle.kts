@@ -29,6 +29,13 @@ android {
                 "proguard-rules.pro"
             )
         }
+        debug {
+            isDebuggable = false
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -85,10 +92,10 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10.1")
 
     // Room Database
-    implementation ("androidx.room:room-ktx:2.6.1")
-    implementation ("androidx.room:room-runtime:2.6.1")
-    annotationProcessor ("androidx.room:room-compiler:2.6.1")
-    kapt ("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
+    implementation("androidx.room:room-runtime:2.6.1")
+    annotationProcessor("androidx.room:room-compiler:2.6.1")
+    kapt("androidx.room:room-compiler:2.6.1")
 
     //dagger-hilt
     implementation("com.google.dagger:hilt-android:2.50")

@@ -1,4 +1,4 @@
-package com.divyanshu.findyourinterest.ui
+package com.divyanshu.findyourinterest.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

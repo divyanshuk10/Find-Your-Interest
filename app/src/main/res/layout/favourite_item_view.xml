@@ -55,7 +55,7 @@
             tools:text="Activity : dsfdf df dsf dsf sdf dsf sdfsdfdsfdsfdsf df dsfds dsfdfdsfsdf sdf sdfdsf" />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/txtInterestType"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -70,7 +70,7 @@
             tools:text="Type : " />
 
         <TextView
-            android:id="@+id/textView6"
+            android:id="@+id/txtInterestParticipants"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -79,13 +79,13 @@
             android:maxLines="1"
             android:textColor="@color/black"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="@+id/textView5"
-            app:layout_constraintStart_toStartOf="@+id/textView5"
-            app:layout_constraintTop_toBottomOf="@+id/textView5"
+            app:layout_constraintEnd_toEndOf="@+id/txtInterestType"
+            app:layout_constraintStart_toStartOf="@+id/txtInterestType"
+            app:layout_constraintTop_toBottomOf="@+id/txtInterestType"
             tools:text="Participants : " />
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/txtInterestAccessibility"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -94,13 +94,13 @@
             android:maxLines="1"
             android:textColor="@color/black"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="@+id/textView5"
-            app:layout_constraintStart_toStartOf="@+id/textView5"
-            app:layout_constraintTop_toBottomOf="@+id/textView6"
+            app:layout_constraintEnd_toEndOf="@+id/txtInterestType"
+            app:layout_constraintStart_toStartOf="@+id/txtInterestType"
+            app:layout_constraintTop_toBottomOf="@+id/txtInterestParticipants"
             tools:text="Accessibility : " />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/txtInterestLink"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -109,9 +109,9 @@
             android:maxLines="1"
             android:textColor="@color/black"
             android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="@+id/textView5"
-            app:layout_constraintStart_toStartOf="@+id/textView5"
-            app:layout_constraintTop_toBottomOf="@+id/textView7"
+            app:layout_constraintEnd_toEndOf="@+id/txtInterestType"
+            app:layout_constraintStart_toStartOf="@+id/txtInterestType"
+            app:layout_constraintTop_toBottomOf="@+id/txtInterestAccessibility"
             tools:text="Link (Optional) : " />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -9,6 +9,8 @@ import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.divyanshu.findyourinterest.R
 import com.divyanshu.findyourinterest.databinding.ActivityMainBinding
+import com.divyanshu.findyourinterest.viewmodel.FavouriteInterestViewModel
+import com.divyanshu.findyourinterest.viewmodel.InterestViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
