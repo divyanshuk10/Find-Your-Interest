@@ -9,6 +9,9 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 @Entity(tableName = "interest_table")
 data class Interest(
+    @IgnoredOnParcel
+    @PrimaryKey(autoGenerate = true)
+    var id: Int? = null,
     val accessibility: Double,
     val activity: String,
     val key: String,
@@ -16,8 +19,4 @@ data class Interest(
     val participants: Int,
     val price: Double,
     val type: String
-) : Parcelable{
-    @IgnoredOnParcel
-    @PrimaryKey(autoGenerate = true)
-    val id:Int = 0
-}
+) : Parcelable

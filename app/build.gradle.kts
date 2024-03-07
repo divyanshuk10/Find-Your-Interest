@@ -1,7 +1,7 @@
 plugins {
+    id("kotlin-kapt")
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("kotlin-kapt")
     id("androidx.navigation.safeargs.kotlin")
     id("kotlin-parcelize")
     id("dagger.hilt.android.plugin")
@@ -85,10 +85,10 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10.1")
 
     // Room Database
-    val roomVersion = "2.6.1"
-    implementation("androidx.room:room-runtime:$roomVersion")
-    annotationProcessor("androidx.room:room-compiler:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
+    implementation ("androidx.room:room-ktx:2.6.1")
+    implementation ("androidx.room:room-runtime:2.6.1")
+    annotationProcessor ("androidx.room:room-compiler:2.6.1")
+    kapt ("androidx.room:room-compiler:2.6.1")
 
     //dagger-hilt
     implementation("com.google.dagger:hilt-android:2.50")
