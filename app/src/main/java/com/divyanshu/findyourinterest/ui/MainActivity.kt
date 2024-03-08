@@ -28,6 +28,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
         setNavController()
+        navigateToInterestScreen()
+    }
+
+    private fun navigateToInterestScreen() {
+        viewModel.shouldNavigate.observe(this) {
+            if (it) {
+                binding.bottomNavigation.selectedItemId = R.id.interestsFragment
+                //binding.bottomNavigation.menu.findItem(R.id.interestsFragment).setChecked(it)
+                viewModel.navigateToInterestsTab(!it)
+            }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -23,7 +23,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:contentDescription="@null"
-            android:scaleType="fitXY"
+            android:scaleType="fitEnd"
             app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -113,6 +113,18 @@
             app:layout_constraintStart_toStartOf="@+id/txtInterestType"
             app:layout_constraintTop_toBottomOf="@+id/txtInterestAccessibility"
             tools:text="Link (Optional) : " />
+
+        <ImageButton
+            android:id="@+id/imgBtnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@null"
+            android:contentDescription="@null"
+            android:src="@android:drawable/ic_menu_delete"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@android:color/holo_red_light" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

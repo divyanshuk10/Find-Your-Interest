@@ -8,11 +8,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.divyanshu.findyourinterest.databinding.FavouriteItemViewBinding
+import com.divyanshu.findyourinterest.fragments.FavouriteFragment
 import com.divyanshu.findyourinterest.fragments.FavouriteFragmentDirections
 import com.divyanshu.findyourinterest.model.Interest
 import com.divyanshu.findyourinterest.utils.Constant
 
-class FavouriteInterestsAdapter : RecyclerView.Adapter<FavouriteInterestsAdapter.ItemViewHolder>() {
+class FavouriteInterestsAdapter(private val fragment: FavouriteFragment) :
+    RecyclerView.Adapter<FavouriteInterestsAdapter.ItemViewHolder>() {
 
     inner class ItemViewHolder(val binding: FavouriteItemViewBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -47,11 +49,26 @@ class FavouriteInterestsAdapter : RecyclerView.Adapter<FavouriteInterestsAdapter
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val currentItem = differ.currentList[position]
         holder.binding.apply {
-            txtInterest.text = currentItem.activity
-            txtInterestParticipants.text = currentItem.participants.toString()
-            txtInterestType.text = currentItem.type
-            txtInterestLink.text = currentItem.link
-            txtInterestAccessibility.text = currentItem.accessibility.toString()
+            txtInterest.text = buildString {
+                append("Activity :")
+                append(currentItem.activity)
+            }
+            txtInterestParticipants.text = buildString {
+                append("Participants :")
+                append(currentItem.participants)
+            }
+            txtInterestType.text = buildString {
+                append("Type :")
+                append(currentItem.type)
+            }
+            txtInterestLink.text = buildString {
+                append("Interest :")
+                append(currentItem.link)
+            }
+            txtInterestAccessibility.text = buildString {
+                append("Accessibility :")
+                append(currentItem.accessibility.toString())
+            }
             imgItemBody.load(Constant.hobbiesList[(0..9).random()])
         }
         holder.itemView.setOnClickListener {
@@ -62,6 +79,10 @@ class FavouriteInterestsAdapter : RecyclerView.Adapter<FavouriteInterestsAdapter
                     )
                 it.findNavController().navigate(direction)
             }
+        }
+
+        holder.binding.imgBtnDelete.setOnClickListener {
+            fragment.deleteInterest(currentItem)
         }
     }
 }

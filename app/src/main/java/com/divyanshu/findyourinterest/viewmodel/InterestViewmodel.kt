@@ -17,6 +17,8 @@ class InterestViewModel @Inject constructor(private val repository: InterestRepo
 
     private val _interestResponse = MutableLiveData<Result<Interest>>()
     val interest: LiveData<Result<Interest>> get() = _interestResponse
+    private val _shouldNavigate = MutableLiveData<Boolean>()
+    val shouldNavigate: LiveData<Boolean> get() = _shouldNavigate
 
     init {
         getAnInterest()
@@ -33,6 +35,10 @@ class InterestViewModel @Inject constructor(private val repository: InterestRepo
                 }
             }
         }
+    }
+
+    fun navigateToInterestsTab(shouldNavigate: Boolean) {
+        _shouldNavigate.postValue(shouldNavigate)
     }
 
 }

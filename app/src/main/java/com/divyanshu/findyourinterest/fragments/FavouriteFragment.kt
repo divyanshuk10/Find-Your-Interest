@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -34,7 +35,7 @@ class FavouriteFragment : Fragment(R.layout.fragment_favourite) {
     }
 
     private fun setupRecyclerview() {
-        favouriteInterestsAdapter = FavouriteInterestsAdapter()
+        favouriteInterestsAdapter = FavouriteInterestsAdapter(this)
 
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(activity)
@@ -48,6 +49,11 @@ class FavouriteFragment : Fragment(R.layout.fragment_favourite) {
                 shouldShowEmptyListText(it)
             }
         }
+    }
+
+    fun deleteInterest(interest: Interest) {
+        favouritesViewModel.deleteFromFavorites(interest)
+        Toast.makeText(activity, "Interest deleted", Toast.LENGTH_LONG).show()
     }
 
     private fun shouldShowEmptyListText(it: List<Interest>) {
