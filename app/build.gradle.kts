@@ -29,13 +29,6 @@ android {
                 "proguard-rules.pro"
             )
         }
-        debug {
-            isDebuggable = false
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
-            )
-        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -105,4 +98,7 @@ dependencies {
 
     // coil (for Image loading)
     implementation("io.coil-kt:coil:2.5.0")
+
+    // Network module
+    implementation(project(":core:network"))
 }

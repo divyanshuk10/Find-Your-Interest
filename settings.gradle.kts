@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Find Your Interest"
 include(":app")
+include(":core:network")
