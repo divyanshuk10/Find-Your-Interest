@@ -5,6 +5,7 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
     id("kotlin-parcelize")
     id("dagger.hilt.android.plugin")
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
 }
 
 android {
@@ -101,4 +102,5 @@ dependencies {
 
     // Network module
     implementation(project(":core:network"))
+    implementation(project(":core:model"))
 }
