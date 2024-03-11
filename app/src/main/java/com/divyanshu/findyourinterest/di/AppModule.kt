@@ -1,6 +1,6 @@
 package com.divyanshu.findyourinterest.di
 
-import com.divyanshu.findyourinterest.network.InterestAPI
+import com.divyanshu.findyourinterest.network.InterestNetworkAPI
 import com.divyanshu.findyourinterest.utils.Constant
 import dagger.Module
 import dagger.Provides
@@ -30,13 +30,13 @@ object AppModule {
         OkHttpClient.Builder().addNetworkInterceptor(loggingInterceptor).build()
 
     @Provides
-    fun providesRetrofitInstance(baseUrl: String, okHttpClient: OkHttpClient): InterestAPI =
+    fun providesRetrofitInstance(baseUrl: String, okHttpClient: OkHttpClient): InterestNetworkAPI =
         Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .client(okHttpClient)
             .build()
-            .create(InterestAPI::class.java)
+            .create(InterestNetworkAPI::class.java)
 
 }
