@@ -1,10 +1,10 @@
 package com.divyanshu.network.retrofit
 
 import com.divyanshu.model.BuildConfig
-import com.divyanshu.model.Interest
 import com.divyanshu.network.FYINetworkDataSource
+import com.divyanshu.network.model.NetworkInterest
+import kotlinx.serialization.Serializable
 import okhttp3.Call
-import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -12,13 +12,18 @@ import retrofit2.http.GET
 import javax.inject.Inject
 import javax.inject.Singleton
 
-interface RetrofitFYINetworkApi {
+private interface RetrofitFYINetworkApi {
 
     @GET(value = "activity/")
-    suspend fun getRandomInterest(): Response<Interest>
+    suspend fun getRandomInterest(): NetworkResponse<NetworkInterest>
 }
 
 private const val BASE_URL = BuildConfig.BASE_URL
+
+@Serializable
+private data class NetworkResponse<T>(
+    val data: T,
+)
 
 
 @Singleton
@@ -36,7 +41,8 @@ internal class RetrofitFYINetwork @Inject constructor(
         .build()
         .create(RetrofitFYINetworkApi::class.java)
 
-    override suspend fun getRandomInterest(): Response<Interest> {
-        return networkApi.getRandomInterest()
+    override suspend fun getRandomInterest(): NetworkInterest {
+        return networkApi.getRandomInterest().data
     }
+
 }
