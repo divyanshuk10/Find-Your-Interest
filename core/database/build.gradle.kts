@@ -1,12 +1,12 @@
 plugins {
-    id("com.android.library")
     id("kotlin-kapt")
+    id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
-    namespace = "com.divyanshu.model"
+    namespace = "com.divyanshu.database"
     compileSdk = 34
 
     defaultConfig {
@@ -16,20 +16,12 @@ android {
         consumerProguardFiles("consumer-rules.pro")
     }
 
-    buildFeatures{
-        buildConfig = true
-    }
-
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = "1.8"
-    }
-
-    secrets {
-        defaultPropertiesFileName = "secrets.defaults.properties"
     }
 }
 
@@ -42,4 +34,10 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
+    //dagger-hilt
+    implementation("com.google.dagger:hilt-android:2.51")
+    kapt("com.google.dagger:hilt-android-compiler:2.51")
+    kapt("androidx.hilt:hilt-compiler:1.2.0")
+
+    implementation(project(":core:model"))
 }
