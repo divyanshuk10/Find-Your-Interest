@@ -9,6 +9,21 @@ plugins {
 android {
     namespace = "com.divyanshu.data"
     compileSdk = 34
+
+    defaultConfig {
+        minSdk = 24
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled=true
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
     testOptions {
         unitTests {
             isIncludeAndroidResources = true
@@ -36,5 +51,9 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 
     implementation(project(":core:database"))
+    implementation(project(":core:model"))
     implementation(project(":core:network"))
+
+    // Multidex
+    implementation("androidx.multidex:multidex:2.0.1")
 }

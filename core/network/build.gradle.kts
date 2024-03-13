@@ -10,7 +10,13 @@ android {
     namespace = "com.divyanshu.network"
     compileSdk = 34
 
-    buildFeatures{
+    defaultConfig {
+        minSdk = 24
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled = true
+    }
+
+    buildFeatures {
         buildConfig = true
     }
 
@@ -48,6 +54,8 @@ dependencies {
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
     implementation("com.squareup.retrofit2:adapter-rxjava3:2.9.0")
 
+    // Multidex
+    implementation("androidx.multidex:multidex:2.0.1")
 
     implementation(project(":core:model"))
 }

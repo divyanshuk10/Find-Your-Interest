@@ -8,7 +8,7 @@ import com.divyanshu.model.Interest
 @Entity(tableName = "interests")
 data class InterestEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    var id: Int? = null,
     val accessibility: Double,
     @ColumnInfo(defaultValue = "")
     val activity: String,
@@ -23,7 +23,6 @@ data class InterestEntity(
 )
 
 fun InterestEntity.asExternalModel() = Interest(
-    id = id,
     accessibility = accessibility,
     activity = activity,
     key = key,
