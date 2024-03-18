@@ -1,6 +1,7 @@
 package com.divyanshu.data.repository
 
 import com.divyanshu.data.Synchronizer
+import com.divyanshu.data.changeListSync
 import com.divyanshu.database.dao.InterestDao
 import com.divyanshu.database.model.InterestEntity
 import com.divyanshu.database.model.asExternalModel
@@ -19,9 +20,10 @@ internal class OfflineFirstInterestsRepository constructor(
             .map { it.map(InterestEntity::asExternalModel) }
 
     override suspend fun syncWith(synchronizer: Synchronizer): Boolean {
-
-       return true
-
+        return synchronizer.changeListSync(
+            randomInterestsFetcher = { networkDataSource.getRandomInterest() },
+            favouriteListFetcher = { interestDao.getAllFavouriteInterests() }
+        )
     }
 
 }
