@@ -9,8 +9,9 @@ import com.divyanshu.model.Interest
 import com.divyanshu.network.FYINetworkDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-internal class OfflineFirstInterestsRepository constructor(
+internal class OfflineFirstInterestsRepository @Inject constructor(
     private val interestDao: InterestDao,
     private val networkDataSource: FYINetworkDataSource
 ) : InterestsRepository {
